@@ -56,18 +56,18 @@ bai2-security
     + Không trực tiếp thể hiện “thời gian ký”, mà lưu bằng chứng thời gian phục vụ xác minh sau này.
 - Giải thích khác biệt giữa thông tin thời gian /M và timestamp RFC3161.
    + /M :
-    + Nằm trong Signature Dictionary.
-    + Chỉ là chuỗi text ghi lại thời điểm ký.
-    + Lấy từ đồng hồ máy tính người ký.
-    + Không có giá trị pháp lý, dễ bị thay đổi.
-    + Không được bảo vệ bởi chữ ký số.
-    + Chỉ dùng để hiển thị trong phần mềm PDF.
+     + Nằm trong Signature Dictionary.
+     + Chỉ là chuỗi text ghi lại thời điểm ký.
+     + Lấy từ đồng hồ máy tính người ký.
+     + Không có giá trị pháp lý, dễ bị thay đổi.
+     + Không được bảo vệ bởi chữ ký số.
+     + Chỉ dùng để hiển thị trong phần mềm PDF.
    + Timestamp (RFC 3161):
-    + Nằm trong gói chữ ký PKCS#7 (trong /Contents).
-    + Là token do TSA (Timestamp Authority) phát hành.
-    + Chứa hash tài liệu + thời gian chính xác.
-    + Được ký bởi TSA → có giá trị pháp lý.
-    + Bảo đảm tài liệu đã tồn tại tại thời điểm đó.
+     + Nằm trong gói chữ ký PKCS#7 (trong /Contents).
+     + Là token do TSA (Timestamp Authority) phát hành.
+     + Chứa hash tài liệu + thời gian chính xác.
+     + Được ký bởi TSA → có giá trị pháp lý.
+     + Bảo đảm tài liệu đã tồn tại tại thời điểm đó.
 3) Các bước tạo và lưu chữ ký trong PDF (đã có private RSA)
 - Viết script/code thực hiện tuần tự:
  1. Chuẩn bị file PDF gốc.
