@@ -34,26 +34,26 @@ bai2-security
 
 2) Thời gian ký được lưu ở đâu?
 - Nêu tất cả vị trí có thể lưu thông tin thời gian:
- + /M trong Signature dictionary (dạng text, không có giá trị pháp lý).
-   + Dạng: chuỗi text ISO 8601, ví dụ "D:20251026 093000+07'00'".
-   + Mục đích: hiển thị “ngày ký” do phần mềm ký thêm vào.
-   + Không có giá trị pháp lý vì phụ thuộc vào đồng hồ hệ thống máy người ký.
- + Timestamp token (RFC 3161) trong PKCS#7 (attribute timeStampToken).
-   + Là chữ ký thời gian điện tử phát hành bởi Time Stamping Authority (TSA).
-   + Lưu trong trường timeStampToken (thuộc nhóm “authenticatedAttributes”).
-   + Có giá trị pháp lý vì được ký bởi TSA, xác nhận tài liệu tồn tại tại thời điểm đó.
-   + Thường nằm sâu trong nội dung Base64 hoặc DER của /Contents.
- + Document timestamp object (PAdES).
-   + Là một chữ ký đặc biệt (chỉ chứa timestamp, không có người ký).
-   + Dạng object /Type /DocTimeStamp.
-   + Được thêm vào PDF như một lần ký mới (incremental update).
-   + Dùng để “đóng dấu thời gian” cho toàn tài liệu nhằm phục vụ xác minh lâu dài (LTV).
- + DSS (Document Security Store) nếu có lưu timestamp và dữ liệu xác minh.
-   + Thành phần tùy chọn của PAdES-LTV.
-   + Có thể chứa:
-    + Timestamps (bản sao token RFC3161).
-    + Certs, OCSPs, CRLs dùng để kiểm tra lại tính hợp lệ chữ ký.
-   + Không trực tiếp thể hiện “thời gian ký”, mà lưu bằng chứng thời gian phục vụ xác minh sau này.
+  + /M trong Signature dictionary (dạng text, không có giá trị pháp lý).
+    + Dạng: chuỗi text ISO 8601, ví dụ "D:20251026 093000+07'00'".
+    + Mục đích: hiển thị “ngày ký” do phần mềm ký thêm vào.
+    + Không có giá trị pháp lý vì phụ thuộc vào đồng hồ hệ thống máy người ký.
+  + Timestamp token (RFC 3161) trong PKCS#7 (attribute timeStampToken).
+    + Là chữ ký thời gian điện tử phát hành bởi Time Stamping Authority (TSA).
+    + Lưu trong trường timeStampToken (thuộc nhóm “authenticatedAttributes”).
+    + Có giá trị pháp lý vì được ký bởi TSA, xác nhận tài liệu tồn tại tại thời điểm đó.
+    + Thường nằm sâu trong nội dung Base64 hoặc DER của /Contents.
+  + Document timestamp object (PAdES).
+    + Là một chữ ký đặc biệt (chỉ chứa timestamp, không có người ký).
+    + Dạng object /Type /DocTimeStamp.
+    + Được thêm vào PDF như một lần ký mới (incremental update).
+    + Dùng để “đóng dấu thời gian” cho toàn tài liệu nhằm phục vụ xác minh lâu dài (LTV).
+  + DSS (Document Security Store) nếu có lưu timestamp và dữ liệu xác minh.
+    + Thành phần tùy chọn của PAdES-LTV.
+    + Có thể chứa:
+     + Timestamps (bản sao token RFC3161).
+     + Certs, OCSPs, CRLs dùng để kiểm tra lại tính hợp lệ chữ ký.
+    + Không trực tiếp thể hiện “thời gian ký”, mà lưu bằng chứng thời gian phục vụ xác minh sau này.
 - Giải thích khác biệt giữa thông tin thời gian /M và timestamp RFC3161.
   + /M :
    + Nằm trong Signature Dictionary.
