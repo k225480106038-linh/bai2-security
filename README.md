@@ -71,18 +71,34 @@ bai2-security
 3) Các bước tạo và lưu chữ ký trong PDF (đã có private RSA)
 - Viết script/code thực hiện tuần tự:
  1. Chuẩn bị file PDF gốc.
+    <img width="175" height="33" alt="image" src="https://github.com/user-attachments/assets/f3b56d6a-a12c-4ac7-9c03-b47465f03574" />
+
  2. Tạo Signature field (AcroForm), reserve vùng /Contents (8192 bytes).
+    <img width="416" height="246" alt="image" src="https://github.com/user-attachments/assets/25fe0100-36d2-461a-8309-c6be1c408d37" />
+
  3. Xác định /ByteRange (loại trừ vùng /Contents khỏi hash).
+    <img width="415" height="110" alt="image" src="https://github.com/user-attachments/assets/53d71127-addb-4a76-994a-1a34caf49ce2" />
+
  4. Tính hash (SHA-256/512) trên vùng ByteRange.
+    <img width="416" height="92" alt="image" src="https://github.com/user-attachments/assets/507dae36-5066-4e77-9708-71a047007013" />
+
  5. Tạo PKCS#7/CMS detached hoặc CAdES:
  - Include messageDigest, signingTime, contentType.
- - Include certificate chain.
+ - Include cer
+ - tificate chain.
  - (Tùy chọn) thêm RFC3161 timestamp token.
+   <img width="415" height="212" alt="image" src="https://github.com/user-attachments/assets/1fcb272f-d630-4acd-a875-2fc7d96cbf9e" />
+
  6. Chèn blob DER PKCS#7 vào /Contents (hex/binary) đúng offset.
  7. Ghi incremental update.
  8. (LTV) Cập nhật DSS với Certs, OCSPs, CRLs, VRI.
 - Phải nêu rõ: hash alg, RSA padding, key size, vị trí lưu trong PKCS#7.
+  <img width="416" height="193" alt="image" src="https://github.com/user-attachments/assets/c8a41acc-4daf-4af3-9db3-d36bde28dbfd" />
+
 - Đầu ra: mã nguồn, file PDF gốc, file PDF đã ký.
+ + Mã nguồn : bai2_pdf_signer.
+ + File PDF gốc : bai2.pdf.
+ + File PDF đã ký : bai2_with_shadow_text.pdf
 4) Các bước xác thực chữ ký trên PDF đã ký
 - Các bước kiểm tra:
  1. Đọc Signature dictionary: /Contents, /ByteRange.
@@ -93,4 +109,13 @@ bai2-security
  6. Kiểm tra OCSP/CRL.
  7. Kiểm tra timestamp token.
  8. Kiểm tra incremental update (phát hiện sửa đổi).
+    - Kết quả :
+      <img width="343" height="577" alt="image" src="https://github.com/user-attachments/assets/396909ac-715f-4015-874a-6d91f545ccf7" />
+
+      <img width="313" height="44" alt="image" src="https://github.com/user-attachments/assets/904e6d0e-1185-4239-9c74-9ac176bda429" />
+
+      <img width="415" height="214" alt="image" src="https://github.com/user-attachments/assets/3b6a3a91-bc3f-47af-9b36-01119e21978a" />
+
+
+
 - Nộp kèm script verify + log kiểm thử.
