@@ -1,0 +1,1 @@
+python D:\ngolinh\bai2_verify_pdf_signature.py D:\ngolinh\bai2_signed.pdf
